@@ -27,8 +27,7 @@ public abstract class ArmorHudHelper {
         int level = player.getArmorValue();
         int left = width / 2 + 82;
 
-        boolean isRiding = player.getVehicle() != null;
-        int top = height - 49 + (isRiding ? 0 : 10);
+        int top = height - 49 + 10;
 
         for (int i = 1; level > 0 && i < 20; i += 2) {
             if (i <= level) {
