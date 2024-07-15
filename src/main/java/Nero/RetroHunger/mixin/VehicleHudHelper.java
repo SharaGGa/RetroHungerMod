@@ -20,8 +20,7 @@ public class VehicleHudHelper {
     @Unique
     private static final ResourceLocation GUI_ICONS_LOCATION = new ResourceLocation("minecraft","textures/gui/icons.png");
 
-    @Shadow
-    public int rightHeight = 39;
+    private int rightHeight = 39;
 
     @Inject(method = "renderHealthMount", at = @At("HEAD"), cancellable = true, remap = false)
     private void onRenderVehicle(int width, int height, GuiGraphics guiGraphics, CallbackInfo ci) {
