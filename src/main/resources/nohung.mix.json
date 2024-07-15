@@ -1,0 +1,23 @@
+{
+  "required": true,
+  "package": "Nero.RetroHunger.mixin",
+  "mixins": [
+    "GameRuleHelper",
+    "HungerSystemHelper",
+    "ArmorHudHelper",
+    "AirHudHelper"
+
+  ],
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "GameRuleHelper",
+    "HungerSystemHelper",
+    "ArmorHudHelper",
+    "AirHudHelper"
+
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "nohung-referencemap.json"
+}
