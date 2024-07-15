@@ -6,7 +6,8 @@
     "HungerSystemHelper",
     "ArmorHudHelper",
     "AirHudHelper",
-    "VehicleHudHelper"
+    "VehicleHudHelper",
+    "FoodHudHelper"
 
   ],
   "compatibilityLevel": "JAVA_17",
@@ -15,7 +16,8 @@
     "HungerSystemHelper",
     "ArmorHudHelper",
     "AirHudHelper",
-    "VehicleHudHelper"
+    "VehicleHudHelper",
+    "FoodHudHelper"
 
   ],
   "injectors": {

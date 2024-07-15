@@ -15,11 +15,11 @@ public abstract class ArmorHudHelper {
 
 
     @Unique
-    private static final ResourceLocation GUI_ICONS_LOCATION = new ResourceLocation("minecraft","textures/gui/icons.png");
+    private static final ResourceLocation GUI_ICONS_LOCATION = new ResourceLocation("nohung","textures/gui/icons.png");
 
 
     @Inject(method = "renderArmor", at = @At("HEAD"), cancellable = true, remap = false)
-    private void injectNewArmorRendering(GuiGraphics guiGraphics, int width, int height, CallbackInfo ci) {
+    private void onRenderArmor(GuiGraphics guiGraphics, int width, int height, CallbackInfo ci) {
         Minecraft minecraft = Minecraft.getInstance();
         Player player = minecraft.player;
         if (player == null) return;

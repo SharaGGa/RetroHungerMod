@@ -1,6 +1,6 @@
 modLoader="javafml" #mandatory
 
-loaderVersion="[47,)" #mandatory
+loaderVersion="[47.3.0,)" #mandatory
 
 license="MIT"
 
@@ -12,12 +12,12 @@ version="${file.jarVersion}" #mandatory
 
 displayName="Retro Hunger Mod" #mandatory
 
-logoFile="examplemod.png" #optional
+logoFile="icon.png" #optional
 
 authors="Nero" #optional
 
 description='''
-long Description
+Restore classic alpha-style health and food mechanics.
 '''
 
 [[dependencies.nohung]] #optional
