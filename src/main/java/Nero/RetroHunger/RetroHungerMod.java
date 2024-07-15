@@ -58,7 +58,7 @@ public class RetroHungerMod {
                     event.setCanceled(true);
 
                     if (!player.isCreative())
-                        HandAnimationOverlay.startAnimation();
+                        HandAnimationOverlay.startAnimation(player.getId());
 
                     player.heal(nutrition);
 
