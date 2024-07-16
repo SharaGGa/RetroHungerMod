@@ -30,7 +30,7 @@ public class AirHudHelper {
 
 
         int left = width / 2 - 91;
-        int top = height - this.rightHeight;
+        int top = height - this.rightHeight - 10;
         int air = player.getAirSupply();
 
         if (player.isEyeInFluidType((FluidType) ForgeMod.WATER_TYPE.get()) || air < 300) {
