@@ -1,6 +1,6 @@
 modLoader="javafml" #mandatory
 
-loaderVersion="[47.3.0,)" #mandatory
+loaderVersion="[47,)" #mandatory
 
 license="MIT"
 
