@@ -23,7 +23,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 
-version = '1.4'
+version = '1.5'
 group = 'Nero.NoHung' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'RetroHunger'
 
