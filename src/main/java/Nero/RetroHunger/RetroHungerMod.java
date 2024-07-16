@@ -5,6 +5,7 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -57,11 +58,16 @@ public class RetroHungerMod {
 
                     event.setCanceled(true);
 
-                    if (!player.isCreative())
+                    if (!player.isCreative()) {
+                        player.startUsingItem(event.getHand());
+                        ItemStack foodStack = heldItem.copy();
+                        foodStack.setCount(1);
+                        LivingEntityUseItemEvent.Finish foodEvent = new LivingEntityUseItemEvent.Finish(player, foodStack, food.getNutrition(), foodStack);
+                        MinecraftForge.EVENT_BUS.post(foodEvent);
                         HandAnimationOverlay.startAnimation(player.getId());
-
-                    player.heal(nutrition);
-
+                        player.heal(nutrition);
+                        player.stopUsingItem();
+                    }
                     if (!player.getAbilities().instabuild) {
                         heldItem.shrink(1);
                     }
