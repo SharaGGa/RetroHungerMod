@@ -1,5 +1,7 @@
 package Nero.RetroHunger;
 
+import com.mojang.datafixers.util.Pair;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
@@ -13,6 +15,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+
+import java.util.List;
 
 
 @Mod("nohung")
@@ -42,6 +46,14 @@ public class RetroHungerMod {
 
     @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
     public static class EventHandler {
+        private static void applyFoodEffects(Player player, FoodProperties food) {
+            List<Pair<MobEffectInstance, Float>> effects = food.getEffects();
+            for (Pair<MobEffectInstance, Float> pair : effects) {
+                if (player.level().random.nextFloat() < pair.getSecond()) {
+                    player.addEffect(new MobEffectInstance(pair.getFirst()));
+                }
+            }
+        }
 
 
         @SubscribeEvent
@@ -66,6 +78,7 @@ public class RetroHungerMod {
                         MinecraftForge.EVENT_BUS.post(foodEvent);
                         HandAnimationOverlay.startAnimation(player.getId());
                         player.heal(nutrition);
+                        applyFoodEffects(player, food);
                         player.stopUsingItem();
                     }
                     if (!player.getAbilities().instabuild) {
@@ -75,4 +88,5 @@ public class RetroHungerMod {
             }
         }
     }
+
 }
