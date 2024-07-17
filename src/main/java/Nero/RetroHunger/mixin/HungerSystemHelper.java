@@ -20,11 +20,4 @@ public class HungerSystemHelper {
 
         player.getFoodData().setSaturation(20.0f);
     }
-
-    @Inject(method = "eat", at = @At("HEAD"), cancellable = true)
-    private void onEat(CallbackInfoReturnable<ItemStack> cir) {
-
-        cir.setReturnValue(cir.getReturnValue());
-        cir.cancel();
-    }
 }
