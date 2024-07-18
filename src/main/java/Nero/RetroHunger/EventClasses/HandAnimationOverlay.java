@@ -1,5 +1,6 @@
-package Nero.RetroHunger;
+package Nero.RetroHunger.EventClasses;
 
+import Nero.RetroHunger.RetroHungerMod;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -16,24 +17,27 @@ public class HandAnimationOverlay {
 
     @SubscribeEvent
     public static void onRenderHand(RenderHandEvent event) {
-        if (isAnimating && animationPlayerId == Minecraft.getInstance().player.getId()) {
-            long currentTime = System.currentTimeMillis();
-            long elapsedTime = currentTime - animationStart;
+        if (isAnimating) {
+            assert Minecraft.getInstance().player != null;
+            if (animationPlayerId == Minecraft.getInstance().player.getId()) {
+                long currentTime = System.currentTimeMillis();
+                long elapsedTime = currentTime - animationStart;
 
-            if (elapsedTime < ANIMATION_DURATION) {
-                float progress = (float) elapsedTime / ANIMATION_DURATION;
-                float offset;
+                if (elapsedTime < ANIMATION_DURATION) {
+                    float progress = (float) elapsedTime / ANIMATION_DURATION;
+                    float offset;
 
-                if (progress <= 0.5) {
-                    offset = progress * 2 * -0.5f;
+                    if (progress <= 0.5) {
+                        offset = progress * 2 * -0.5f;
+                    } else {
+                        offset = (1 - (progress - 0.5f) * 2) * -0.5f;
+                    }
+
+                    event.getPoseStack().translate(0, offset, 0);
                 } else {
-                    offset = (1 - (progress - 0.5f) * 2) * -0.5f;
+                    isAnimating = false;
+                    animationPlayerId = -1;
                 }
-
-                event.getPoseStack().translate(0, offset, 0);
-            } else {
-                isAnimating = false;
-                animationPlayerId = -1;
             }
         }
     }

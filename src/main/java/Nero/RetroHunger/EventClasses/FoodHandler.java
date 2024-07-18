@@ -1,5 +1,6 @@
-package Nero.RetroHunger;
+package Nero.RetroHunger.EventClasses;
 
+import Nero.RetroHunger.RetroHungerMod;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;

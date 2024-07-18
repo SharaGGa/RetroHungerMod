@@ -1,5 +1,7 @@
 package Nero.RetroHunger;
 
+import Nero.RetroHunger.EventClasses.FoodHandler;
+import Nero.RetroHunger.EventClasses.PeacefulRegen;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -19,6 +21,7 @@ public class RetroHungerMod {
 
         // Регистрация обработчиков событий
         MinecraftForge.EVENT_BUS.register(FoodHandler.class);
+        MinecraftForge.EVENT_BUS.register(PeacefulRegen.class);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
