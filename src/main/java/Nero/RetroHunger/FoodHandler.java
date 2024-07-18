@@ -14,7 +14,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import java.util.List;
-import java.util.Objects;
 
 import com.mojang.datafixers.util.Pair;
 
@@ -54,7 +53,11 @@ public class FoodHandler {
         return itemStack.isEdible() && itemStack.getItem().getFoodProperties() != null;
     }
     private static boolean canAlwaysEat(ItemStack itemStack) {
-        return Objects.requireNonNull(itemStack.getItem().getFoodProperties()).canAlwaysEat();
+        FoodProperties foodProperties = itemStack.getItem().getFoodProperties();
+        if (foodProperties != null)
+            return foodProperties.canAlwaysEat();
+        else
+            return false;
     }
 
     private static void consumeFood(Player player, ItemStack foodItem) {
