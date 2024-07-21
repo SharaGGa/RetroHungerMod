@@ -9,7 +9,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ChorusFruitItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityTeleportEvent;
+import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -40,7 +42,7 @@ public class FoodHandler {
                     event.setCanceled(true);
                     chorusTeleport(player);
                 } else if (canAlwaysEat(mainHandItem) || !player.getFoodData().needsFood()) {
-                    consumeFood(player, mainHandItem);
+                    eatFood(player, mainHandItem);
                     event.setCanceled(true);
                 }
             } else
@@ -61,14 +63,20 @@ public class FoodHandler {
             return false;
     }
 
-    private static void consumeFood(Player player, ItemStack foodItem) {
+    private static void eatFood(Player player, ItemStack foodItem) {
         if (!player.level().isClientSide) {
             FoodProperties foodProperties = foodItem.getItem().getFoodProperties();
             if (foodProperties != null) {
                 int nutrition = foodProperties.getNutrition();
+                player.startUsingItem(player.getUsedItemHand());
+                ItemStack foodStack = foodItem.copy();
+                foodStack.setCount(1);
+                LivingEntityUseItemEvent.Finish foodEvent = new LivingEntityUseItemEvent.Finish(player, foodStack, foodProperties.getNutrition(), foodStack);
+                MinecraftForge.EVENT_BUS.post(foodEvent);
 
                 player.heal(nutrition);
                 applyFoodEffects(player, foodProperties);
+                player.stopUsingItem();
 
 
                 if (!player.getAbilities().instabuild) {
